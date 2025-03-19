@@ -3,29 +3,24 @@ name: Build LaTeX Resume
 on:
   push:
     branches:
-      - main  # Triggers the workflow on every push to the 'main' branch
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Uses an Ubuntu environment to run the workflow
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Fetches the latest code from the repository
+        uses: actions/checkout@v3
 
       - name: Install LaTeX
-        run: sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-latex-extra  # Installs LaTeX
+        run: sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-latex-extra
 
       - name: Compile LaTeX to PDF
-        run: pdflatex resume.tex  # Compiles your resume.tex file into a PDF
+        run: pdflatex resume.tex
 
       - name: Upload PDF as an artifact
-        uses: actions/upload-artifact@v3  # Uploads the generated PDF to GitHub
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Resume PDF
           path: resume.pdf
-
-      - name: Upload PDF to GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: resume.pdf
