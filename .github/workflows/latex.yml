@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install LaTeX
         run: sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-latex-extra
@@ -20,7 +20,7 @@ jobs:
         run: pdflatex resume.tex
 
       - name: Upload PDF as an artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v4
         with:
           name: Resume PDF
           path: resume.pdf
