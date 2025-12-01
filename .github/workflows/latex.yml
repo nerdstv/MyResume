@@ -13,8 +13,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Fix APT Mirror Issue
+        run: |
+          sudo rm -f /etc/apt/apt-mirrors.txt
+          sudo sed -i '/mirror+file/d' /etc/apt/sources.list
+          sudo apt-get clean
+          sudo apt-get update
+
       - name: Install LaTeX
-        run: sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-latex-extra
+        run: sudo apt-get install -y \
+          texlive-latex-base \
+          texlive-fonts-recommended \
+          texlive-latex-extra
 
       - name: Compile LaTeX to PDF
         run: pdflatex ResumeSatvik.tex
